@@ -1,5 +1,9 @@
 tensorflow
 transformers
+pipeline
+VisionEncoderDecoderModel
+ViTImageProcessor
+AutoTokenizer
 torch
 streamlit
 io
