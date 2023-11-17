@@ -1,4 +1,3 @@
-import tensorflow
 from transformers import pipeline, VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
 import torch
 import streamlit as st
