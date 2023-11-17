@@ -1,4 +1,4 @@
-import io
+import tensorflow
 from transformers import pipeline
 import torch
 import streamlit as st
