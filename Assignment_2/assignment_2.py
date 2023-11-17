@@ -1,8 +1,7 @@
-import tensorflow
+import io
 from transformers import pipeline
 import torch
 import streamlit as st
-import io
 
 @st.cache_resource
 def model_loading():
