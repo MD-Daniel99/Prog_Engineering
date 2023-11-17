@@ -1,5 +1,5 @@
 import tensorflow
-from transformers import pipeline, VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
+from transformers import pipeline
 import torch
 import streamlit as st
 import io
