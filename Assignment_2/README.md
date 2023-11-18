@@ -11,7 +11,7 @@
 - streamlit
 
 ## Рождение образа
- Для удобства ипользования прикреплю ссылку на развернутое через Streamlit приложение: https://astronaut-snowboarding-across-theuniverse.streamlit.app.
+ Для удобства использования прикрепляю ссылку на развернутое через Streamlit приложение: https://astronaut-snowboarding-across-theuniverse.streamlit.app.
 Если вдруг вы задались вопросом, почему название страницы похоже на бред воспаленной фантазии, то взгляните на отчаянную (и неудачную) попытку модели распознать астронавта:
 
 <img width="545" alt="Screenshot 2023-11-18 at 02 25 41" src="https://github.com/MD-Daniel99/Prog_Engineering/assets/74740765/e3c96857-0a4a-47bf-9edb-25e2191474d6">
