@@ -4,4 +4,3 @@ tensorflow
 docx
 pdfminer
 streamlit
-io
