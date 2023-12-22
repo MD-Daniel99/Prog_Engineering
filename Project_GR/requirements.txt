@@ -1,0 +1,7 @@
+transformers 
+torch
+tensorflow
+docx
+pdfminer.high_level
+streamlit
+io
