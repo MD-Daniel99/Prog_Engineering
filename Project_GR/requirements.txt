@@ -2,6 +2,6 @@ transformers
 torch
 tensorflow
 docx
-pdfminer.high_level
+pdfminer
 streamlit
 io
