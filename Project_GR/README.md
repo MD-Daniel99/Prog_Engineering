@@ -14,10 +14,10 @@ streamlit
 
 ## Запуск программы:
 1. Создать виртуальное окружение:
-   `python3 -m venv venv`
+   \`python3 -m venv venv`
 3. Активировать виртуальное окружение:
-    `source venv/bin/activate`
+    \`source venv/bin/activate`
 4. Установите необходимые зависимости, указанные выше и в файле requirements.txt
 5. Перейти в директорию с исполняемым файлом(working_app4.0)
 6. Запустить приложение(обязательно при активированной виртуальной среде):
-    `streamlit run working_app4.0.py`
+    \`streamlit run working_app4.0.py`
