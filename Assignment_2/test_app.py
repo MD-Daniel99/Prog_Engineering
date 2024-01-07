@@ -16,8 +16,8 @@ def test_get_url(mock_text_input):
 
 # Тест 3: Проверка вывода результата работы модели
 @patch("streamlit.button", return_value=True)
-@patch("your_app_file.model_loading")
-@patch("your_app_file.printing")
+@patch("main.model_loading")
+@patch("main.printing")
 def test_processing(mock_printing, mock_model_loading, mock_button):
     pred_mock = mock_model_loading.return_value
     res = "mocked result"
