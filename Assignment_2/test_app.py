@@ -2,11 +2,11 @@ import requests
 import pytest
 from main import model_loading, get_url, processing, printing
 
-BASE_URL = "http://localhost:8501"
+BASE_URL = "https://astronaut-snowboarding-across-theuniverse.streamlit.app"
 
 # Тесты
 def test_root_endpoint():
-    response = requests.get(f"{BASE_URL}/")
+    response = requests.get(BASE_URL)
     assert response.status_code == 200
 
 def test_http_status_code():
