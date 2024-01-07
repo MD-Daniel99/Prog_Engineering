@@ -1,5 +1,5 @@
 # test_app.py
-from main.assignment_2 import model_loading, get_url
+from assignment_2 import model_loading, get_url
 
 def test_model_loading():
     model = model_loading()
