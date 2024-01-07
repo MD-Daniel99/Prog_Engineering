@@ -1,4 +1,5 @@
 import pytest
+import streamlit as st
 from unittest.mock import patch
 from main import model_loading, get_url, processing, printing
 
@@ -15,11 +16,23 @@ def test_get_url(mock_text_input):
 
 # Тест 3: Проверка вывода результата работы модели
 @patch("streamlit.button", return_value=True)
-def test_processing_and_printing(mock_button):
-    pred = model_loading()
-    get_image_url = "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"
-    res = pred(get_image_url)
-    assert res is not None
+@patch("your_app_file.model_loading")
+@patch("your_app_file.printing")
+def test_processing(mock_printing, mock_model_loading, mock_button):
+    pred_mock = mock_model_loading.return_value
+    res = "mocked result"
+    
+    # Подменяем результат работы модели
+    pred_mock.return_value = res
+    
+    # Запускаем тест
+    processing("https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp", pred_mock)
+    
+    # Проверяем, что модель была вызвана с корректными аргументами
+    pred_mock.assert_called_once_with("https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+    
+    # Проверяем, что результат был передан в функцию печати
+    mock_printing.assert_called_once_with(res)
 
 # Запуск тестов
 if __name__ == "__main__":
