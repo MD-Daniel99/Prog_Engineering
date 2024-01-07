@@ -22,16 +22,16 @@ def test_processing(mock_printing, mock_model_loading, mock_button):
     pred_mock = mock_model_loading.return_value
     res = "mocked result"
     
-    # Подменяем результат работы модели
+    # Подмена результата работы модели
     pred_mock.return_value = res
     
-    # Запускаем тест
+    # Запуск теста
     processing("https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp", pred_mock)
     
-    # Проверяем, что модель была вызвана с корректными аргументами
+    # Проверка, что модель была вызвана с корректными аргументами
     pred_mock.assert_called_once_with("https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
     
-    # Проверяем, что результат был передан в функцию печати
+    # Проверка, что результат был передан в функцию печати
     mock_printing.assert_called_once_with(res)
 
 # Запуск тестов
