@@ -1,32 +1,31 @@
-import requests
 import pytest
+import streamlit as st
 from main import model_loading, get_url, processing, printing
 
-BASE_URL = "https://astronaut-snowboarding-across-theuniverse.streamlit.app"
-
-# Тесты
-def test_root_endpoint():
-    response = requests.get(BASE_URL)
-    assert response.status_code == 200
-
-def test_http_status_code():
-    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
-    response = requests.post(f"{BASE_URL}/process_image", json=data)
-    assert response.status_code == 200
-
-def test_response_content():
-    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
-    response = requests.post(f"{BASE_URL}/process_image", json=data)
-     assert "<html" in response.text
-
-def test_app_availability():
-    response = requests.get(f"{BASE_URL}/process_image")
-    assert response.status_code == 200
-
+# Тест 1: Проверка, что модель загружена
 def test_model_loading():
-    assert model_loading() is not None
+    classifier = model_loading()
+    assert classifier is not None
 
-def test_image_recognition_result():
-    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
-    response = requests.post(f"{BASE_URL}/process_image", json=data)
-    assert "Image described:" in response.text
+# Тест 2: Проверка, что url-картинки получено
+def test_get_url():
+    with st._inject_button("Click to start"):
+        st.text_input("Enter picture URL:", value="https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+    get_image_url = get_url()
+    assert get_image_url == "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"
+
+# Тест 3: Проверка вывода результата работы модели
+def test_processing_and_printing():
+    with st._inject_button("Click to start"):
+        st.text_input("Enter picture URL:", value="https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+    pred = model_loading()
+    get_image_url = get_url()
+    with st._inject_button("Click to start"):
+        res = pred(get_image_url)
+    with st._inject_button("Click to start"):
+        printing(res)
+    assert st.get_last_widget_value() == "Image described:\n" + res
+
+# Запуск тестов
+if __name__ == "__main__":
+    pytest.main(["-v", "--capture=no", "your_test_file.py"])
