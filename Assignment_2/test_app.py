@@ -1,52 +1,37 @@
-# test_app.py
-import streamlit_e2e_testing as st
-from assignment_2 import model_loading, get_url, processing, printing
+import requests
+import pytest
+from main import model_loading, get_url, processing, printing
 
-# 1. Первый тест проверяет доступность приложения при обращении к корню сервера
+BASE_URL = "http://localhost:8501"
+
+# Тесты
 def test_root_endpoint():
-    st._init()
-    with st._exception_handler():
-        st.script_run("assignment_2.py")  # Подставьте правильный путь к вашему приложению
-    st.expect("Image-to-text model")
+    response = requests.get(f"{BASE_URL}/")
+    assert response.status_code == 200
 
-# 2. Тест проверяет код ответа HTTP
 def test_http_status_code():
-    st._init()
-    with st._exception_handler():
-        st.script_run("assignment_2.py")  # Подставьте правильный путь к вашему приложению
-    st.submit_form({"Enter picture URL:": "example.jpg", "Click to start": None})
-    st.expect_code(200)
+    data = {"image_url": "example.jpg"}
+    response = requests.post(f"{BASE_URL}/process_image", json=data)
+    assert response.status_code == 200
 
-# 3. Тест проверяет содержание ответа
 def test_response_content():
-    st._init()
-    with st._exception_handler():
-        st.script_run("assignment_2.py")  # Подставьте правильный путь к вашему приложению
-    st.submit_form({"Enter picture URL:": "example.jpg", "Click to start": None})
-    st.expect("Image described:")
+    data = {"image_url": "example.jpg"}
+    response = requests.post(f"{BASE_URL}/process_image", json=data)
+    assert "description" in response.json()
 
-# 4. Тест проверяет, что программе предоставлена URL-ссылка на картинку
 def test_valid_image_url():
+    # Мы не можем тестировать функцию get_url напрямую, так как она взаимодействует с вводом пользователя
+    # Вместо этого мы проверяем, что получаемый URL валиден
     assert get_url() is not None
 
-# 5. Тест проверяет доступность приложения. Код статуса ответа HTTP должен быть равен 200
 def test_app_availability():
-    st._init()
-    with st._exception_handler():
-        st.script_run("assignment_2.py")  # Подставьте правильный путь к вашему приложению
-    st.expect_code(200)
+    response = requests.get(f"{BASE_URL}/process_image")
+    assert response.status_code == 200
 
-# 6. Тест проверяет, что модель успешно загружена
 def test_model_loading():
     assert model_loading() is not None
 
-# 7. Тест проверяет результат распознавания картинки и выводит текстовое описание картинки
 def test_image_recognition_result():
-    st._init()
-    with st._exception_handler():
-        st.script_run("assignment_2.py")  # Подставьте правильный путь к вашему приложению
-    st.submit_form({"Enter picture URL:": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp", "Click to start": None})
-    st.expect("Image described:")
- 
-
-
+    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
+    response = requests.post(f"{BASE_URL}/process_image", json=data)
+    assert "Image described:" in response.text
