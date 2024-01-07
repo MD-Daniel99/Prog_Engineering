@@ -2,7 +2,7 @@ import requests
 import pytest
 from main import model_loading, get_url, processing, printing
 
-BASE_URL = "http://localhost:8501"
+BASE_URL = "https://astronaut-snowboarding-across-theuniverse.streamlit.app"
 
 # Тесты
 def test_root_endpoint():
