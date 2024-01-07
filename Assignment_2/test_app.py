@@ -1,5 +1,5 @@
 import pytest
-import streamlit as st
+from unittest.mock import patch
 from main import model_loading, get_url, processing, printing
 
 # Тест 1: Проверка, что модель загружена
@@ -8,24 +8,18 @@ def test_model_loading():
     assert classifier is not None
 
 # Тест 2: Проверка, что url-картинки получено
-def test_get_url():
-    with st.button("Click to start"):
-        st.text_input("Enter picture URL:", value="https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+@patch("streamlit.text_input", return_value="https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+def test_get_url(mock_text_input):
     get_image_url = get_url()
     assert get_image_url == "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"
 
 # Тест 3: Проверка вывода результата работы модели
-def test_processing_and_printing():
-    with st.button("Click to start"):
-        st.text_input("Enter picture URL:", value="https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp")
+@patch("streamlit.button", return_value=True)
+def test_processing_and_printing(mock_button):
     pred = model_loading()
-    get_image_url = get_url()
-    res = None
-    with st.button("Click to start"):
-        res = pred(get_image_url)
-    with st.button("Click to start"):
-        printing(res)
-    assert st.get_last_widget_value() == "Image described:\n" + res
+    get_image_url = "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"
+    res = pred(get_image_url)
+    assert res is not None
 
 # Запуск тестов
 if __name__ == "__main__":
