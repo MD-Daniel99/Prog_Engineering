@@ -28,4 +28,4 @@ def test_processing_and_printing():
 
 # Запуск тестов
 if __name__ == "__main__":
-    pytest.main(["-v", "--capture=no", "your_test_file.py"])
+    pytest.main(["-v", "--capture=no", "test_app.py"])
