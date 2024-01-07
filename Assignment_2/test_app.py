@@ -10,12 +10,12 @@ def test_root_endpoint():
     assert response.status_code == 200
 
 def test_http_status_code():
-    data = {"image_url": "example.jpg"}
+    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
     response = requests.post(f"{BASE_URL}/process_image", json=data)
     assert response.status_code == 200
 
 def test_response_content():
-    data = {"image_url": "example.jpg"}
+    data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
     response = requests.post(f"{BASE_URL}/process_image", json=data)
     assert "description" in response.json()
 
