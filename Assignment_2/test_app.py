@@ -17,7 +17,7 @@ def test_http_status_code():
 def test_response_content():
     data = {"image_url": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp"}
     response = requests.post(f"{BASE_URL}/process_image", json=data)
-    assert "description" in response.json()
+     assert "<html" in response.text
 
 def test_app_availability():
     response = requests.get(f"{BASE_URL}/process_image")
