@@ -1,7 +1,7 @@
 import pytest
 import streamlit as st
 from unittest.mock import patch
-from main import model_loading, get_url, processing, printing
+from assignment_2  import model_loading, get_url, processing, printing
 
 # Тест 1: Проверка, что модель загружена
 def test_model_loading():
@@ -36,4 +36,4 @@ def test_processing(mock_printing, mock_model_loading, mock_button):
 
 # Запуск тестов
 if __name__ == "__main__":
-    pytest.main(["-v", "--capture=no", "test_app.py"])
+    pytest.assignment_2(["-v", "--capture=no", "test_app.py"])
